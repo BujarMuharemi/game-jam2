@@ -9,15 +9,15 @@ public class GameController : MonoBehaviour
 
     public GameObject player;
     PlayerMovement pm;
-         
+    GameObject GameOverPanel;
 
     void Start()
     {
+        GameOverPanel = GameObject.Find("GameOverPanel");
+        GameOverPanel.SetActive(false);
         pm  = player.GetComponent<PlayerMovement>();
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         xrayState = pm.xrayUsed;
@@ -25,7 +25,18 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
+            //Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (pm.health == 0)
+        {
+            Debug.Log("Game over");
+            GameOverPanel.SetActive(true);
+            //Time.timeScale = 0;
         }
     }
 }

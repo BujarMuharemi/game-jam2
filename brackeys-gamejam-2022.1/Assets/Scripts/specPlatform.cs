@@ -10,7 +10,6 @@ public class specPlatform : MonoBehaviour
     {
         gc = GameObject.Find("GameController").GetComponent<GameController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        Debug.Log(spriteRenderer.enabled);
     }
 
     // Update is called once per frame

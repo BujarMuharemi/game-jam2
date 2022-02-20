@@ -13,8 +13,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float xrayCooldown = 0f;
     public bool xrayUsed = false;
+    bool playerDead = false;
 
     SpriteRenderer spriteRenderer;
+    public int health = 3;
 
     void Start()
     {
@@ -24,48 +26,64 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-        Debug.DrawRay(transform.position, -Vector2.up, Color.green);
-
-        if (hit.collider != null)
+    {
+        if (health == 0)
         {
-            Debug.Log(hit.point);
+            playerDead = true;
         }
 
-        if (xrayUsed)
+        if (!playerDead)
         {
-            xrayCooldown += Time.deltaTime;
-            if (xrayCooldown > 2)
+            horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+            Debug.DrawRay(transform.position, -Vector2.up, Color.green);
+
+            if (hit.collider != null)
             {
-                xrayUsed = false;                
-                xrayCooldown = 0f;
-                spriteRenderer.enabled = true;
+                //Debug.Log(hit.point);
             }
-        } 
 
-        if (Input.GetKeyDown("space") && jumpAllowed)
-        {
-            jumpAllowed = false;
-            rigi.AddForce(transform.up * jumpHeight , ForceMode2D.Impulse);
-        }else if (Input.GetKeyDown("e") && xrayCooldown==0f)
-        {
-            xrayUsed = true;
-            spriteRenderer.enabled = false;
+            if (xrayUsed)
+            {
+                xrayCooldown += Time.deltaTime;
+                if (xrayCooldown > 2)
+                {
+                    xrayUsed = false;
+                    xrayCooldown = 0f;
+                    spriteRenderer.enabled = true;
+                }
+            }
+
+            if (Input.GetKeyDown("space") && jumpAllowed)
+            {
+                jumpAllowed = false;
+                rigi.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+            }
+            else if (Input.GetKeyDown("e") && xrayCooldown == 0f)
+            {
+                xrayUsed = true;
+                spriteRenderer.enabled = false;
+            }
         }
+        
 
     }
     void FixedUpdate()
     {
-        Vector2 a = new Vector2(horizontalMove + movementSpeed * Time.fixedDeltaTime , 0);
-        rigi.AddForce(a);
-
+        if (!playerDead)
+        {
+            Vector2 a = new Vector2(horizontalMove + movementSpeed * Time.fixedDeltaTime, 0);
+            rigi.AddForce(a);
+        }
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {  
         jumpAllowed = true;
+        if (collision.gameObject.tag == "Bullet")
+        {
+            health--;
+        }
 
     }
 
