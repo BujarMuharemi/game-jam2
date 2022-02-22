@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Platform
   - Bullet
+  - Spikes
+  - Health
   layers:
   - Default
   - TransparentFX

@@ -17,8 +17,10 @@ public class CannonController : MonoBehaviour
     {
         bulletTime += Time.deltaTime;
         if(bulletTime > bulletShootingTime)
-        {
-            Instantiate(Bullet, transform.position, Quaternion.identity);           
+        {   
+            //creating the pos for the cannon, putting it 1f on the z axis so its behind the canonn
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, 1f);
+            GameObject bullet = Instantiate(Bullet, pos, Quaternion.identity);            
             bulletTime = 0f;
         }
         

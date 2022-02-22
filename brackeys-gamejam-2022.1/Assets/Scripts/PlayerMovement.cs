@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    TODO: split player Movement and Player Controller seperatly ??
+ */
+
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,11 +21,13 @@ public class PlayerMovement : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     public int health = 3;
+    HealthbarController healthbarControler;
 
     void Start()
     {
         this.rigi = this.gameObject.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
     }
 
     // Update is called once per frame
@@ -80,11 +86,31 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision)
     {  
         jumpAllowed = true;
+        
+
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.tag == "Bullet")
         {
             health--;
+            healthbarControler.decreaseHealth(health,1);
         }
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision);
+        if (collision.gameObject.tag == "Spikes")
+        {
+            health--;
+            healthbarControler.decreaseHealth(health,1);
+        }else if (collision.gameObject.tag == "Health" && health<3)
+        {
+            Destroy(collision.gameObject);
+            health++;
+            healthbarControler.increaseHealth(health, 1);
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
