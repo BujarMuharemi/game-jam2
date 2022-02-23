@@ -5,7 +5,11 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 * more polish then last time
 
 ## Dev Screenshots
-![first screenshot](./firstScreenshot.PNG)
+* first screenshot 
+    * ![first screenshot](./firstScreenshot.PNG)
+* second screenshot 
+    * ![second screenshot](./secondScreenshot.PNG)
+
 
 ## To Do List
 ### General
@@ -19,10 +23,10 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
         * *-> xray can just be refiled with pickups'*
 
 
-* @create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range etc
+* create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range etc
 * ~~draw "ball player"~~
 * ~~and just 1 health, because it makes everything worse~~ → instant death makes it better
-* add parallax effect to game so it has depth
+* @ add parallax effect to game so it has depth -> added it but need to change art for the "infinity" layers
 * "level done" pickup w/ icon and  next lvl canvas(without function)
 * shader w/ radius for x ray
 * add some pickup for points/ u have to pick up all to pass a level...
@@ -34,6 +38,8 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 - ~~different backgrounds (tree layer, mountains/hills etc)~~
  - ~~draw hearts for UI~~
 - ~~draw icon/bar for xray view~~
+- blur background images in gimp -> doing that in unity is too much work (setting up different camera for postprocessing etc)
+- make the 3 backgrounds in gimp
 
     #### *later*
     * particle effects for everything (getting hit, landing somewhere)
@@ -67,5 +73,8 @@ should also be done before starting level creation. I very simple in unity.
 * some music which matches the style and pace of the game
 * 2 songs minimum, which loop
 
+
+## Things learned (misc list)
+* always import all sprites with the same pixels per unit, so they look good with a scale of one. This makes it easier for scaling and all sprites look the same/better..
 
 
