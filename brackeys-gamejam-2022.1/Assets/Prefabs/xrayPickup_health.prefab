@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3971850424088803299}
   - component: {fileID: 3623376797493631234}
   m_Layer: 0
-  m_Name: health
+  m_Name: xrayPickup_health
   m_TagString: Health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

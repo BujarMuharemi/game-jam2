@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
     TODO: split player Movement and Player Controller seperatly ??
@@ -17,8 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float xrayCooldown = 0f;
     public bool xrayUsed = false;
+    Slider xraySlider;
+
     bool playerDead = false;
     AudioSource playerAS;
+    
 
     SpriteRenderer spriteRenderer;
     public int health = 3;
@@ -29,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         this.rigi = this.gameObject.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerAS = gameObject.GetComponent<AudioSource>();
+        xraySlider = GameObject.Find("XrayBar").transform.GetChild(0).GetComponent<Slider>();
         //healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
     }
 
@@ -53,26 +58,38 @@ public class PlayerMovement : MonoBehaviour
                 //Debug.Log(hit.point);
             }
 
-            if (xrayUsed)
-            {
-                xrayCooldown += Time.deltaTime;
-                if (xrayCooldown > 2)
-                {
-                    xrayUsed = false;
-                    xrayCooldown = 0f;
-                    spriteRenderer.enabled = true;
-                }
-            }
+            //if (xrayUsed)
+            //{
+            //    xrayCooldown += Time.deltaTime;
+            //    if (xrayCooldown > 2)
+            //    {
+            //        xrayUsed = false;
+            //        xrayCooldown = 0f;
+            //        spriteRenderer.enabled = true;
+            //    }
+            //}
 
-            if (Input.GetKeyDown("space") && jumpAllowed)
+            if (Input.GetKeyDown("w") && jumpAllowed)
             {
                 jumpAllowed = false;
                 rigi.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-            }
-            else if (Input.GetKeyDown("e") && xrayCooldown == 0f)
+            }           
+            else if (Input.GetKey("m"))
             {
-                xrayUsed = true;
-                spriteRenderer.enabled = false;
+                if (xraySlider.value > 0)
+                {
+                    xrayUsed = true;
+                    xraySlider.value -= Time.deltaTime;
+                }
+                else
+                {
+                    xrayUsed = false;
+                }
+                
+            }
+            else if (Input.GetKeyUp("m"))
+            {
+                xrayUsed = false;
             }
         }
         
@@ -109,10 +126,11 @@ public class PlayerMovement : MonoBehaviour
         {
             health-=3;
             //healthbarControler.decreaseHealth(health,1);
-        }else if (collision.gameObject.tag == "Health" && health<3)
+        }else if (collision.gameObject.tag == "Health")
         {
             Destroy(collision.gameObject);
-            health++;
+            xraySlider.value += 1;
+            //health++;
             //healthbarControler.increaseHealth(health, 1);
         }
     }

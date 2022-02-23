@@ -7,11 +7,12 @@ public class CannonController : MonoBehaviour
     public GameObject Bullet;
     public float bulletShootingTime = 1f;
     float bulletTime = 1f;
-
+    AudioSource pew;
     
     void Start()
     {
-        
+        pew = gameObject.GetComponent<AudioSource>();
+
     }
     void Update()
     {
@@ -22,6 +23,7 @@ public class CannonController : MonoBehaviour
             Vector3 pos = new Vector3(transform.position.x, transform.position.y, 1f);
             GameObject bullet = Instantiate(Bullet, pos, Quaternion.identity);            
             bulletTime = 0f;
+            pew.Play();
         }
         
     }
