@@ -18,24 +18,28 @@ public class PlayerMovement : MonoBehaviour
     public float xrayCooldown = 0f;
     public bool xrayUsed = false;
     bool playerDead = false;
+    AudioSource playerAS;
 
     SpriteRenderer spriteRenderer;
     public int health = 3;
-    HealthbarController healthbarControler;
+    //HealthbarController healthbarControler;
 
     void Start()
     {
         this.rigi = this.gameObject.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
+        playerAS = gameObject.GetComponent<AudioSource>();
+        //healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health == 0)
+        if (health == 0 && !playerDead)
         {
+            playerAS.Play();
             playerDead = true;
+            
         }
 
         if (!playerDead)
@@ -93,8 +97,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            health--;
-            healthbarControler.decreaseHealth(health,1);
+            health -= 3;
+            //healthbarControler.decreaseHealth(health,1);
         }
     }
 
@@ -103,13 +107,13 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(collision);
         if (collision.gameObject.tag == "Spikes")
         {
-            health--;
-            healthbarControler.decreaseHealth(health,1);
+            health-=3;
+            //healthbarControler.decreaseHealth(health,1);
         }else if (collision.gameObject.tag == "Health" && health<3)
         {
             Destroy(collision.gameObject);
             health++;
-            healthbarControler.increaseHealth(health, 1);
+            //healthbarControler.increaseHealth(health, 1);
         }
     }
 
