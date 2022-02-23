@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool playerDead = false;
     AudioSource playerAS;
-    
+    GameObject playerBase;
 
     SpriteRenderer spriteRenderer;
     public int health = 3;
@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerAS = gameObject.GetComponent<AudioSource>();
         xraySlider = GameObject.Find("XrayBar").transform.GetChild(0).GetComponent<Slider>();
+
+        playerBase = transform.GetChild(0).gameObject;
         //healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
     }
 
@@ -49,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (!playerDead)
         {
-            horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;
+            horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;            
+
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
             Debug.DrawRay(transform.position, -Vector2.up, Color.green);
 
@@ -92,6 +95,10 @@ public class PlayerMovement : MonoBehaviour
                 xrayUsed = false;
             }
         }
+        else
+        {
+            playerBase.transform.GetChild(2).gameObject.SetActive(false);
+        }
         
 
     }
@@ -101,6 +108,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 a = new Vector2(horizontalMove + movementSpeed * Time.fixedDeltaTime, 0);
             rigi.AddForce(a);
+            playerBase.transform.RotateAround(transform.position, Vector3.back, Input.GetAxis("Horizontal") * 5 );
+
+
         }
     }
 
@@ -121,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         if (collision.gameObject.tag == "Spikes")
         {
             health-=3;
