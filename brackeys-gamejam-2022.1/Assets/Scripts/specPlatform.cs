@@ -13,7 +13,7 @@ public class specPlatform : MonoBehaviour
 
     void Start()
     {
-        gc = GameObject.Find("GameController").GetComponent<GameController>();
+        gc = GameObject.Find("_GameController").GetComponent<GameController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         hitPlatform = gameObject.GetComponent<AudioSource>();
         
@@ -24,7 +24,8 @@ public class specPlatform : MonoBehaviour
     {
         if (gc.xrayState)
         {
-            spriteRenderer.enabled = true;           
+            spriteRenderer.enabled = true;
+            spriteRenderer.color = setSpriteAlpha(1f, spriteRenderer.color);
         }
 
         //handling the sprite enable when the player touches the platform
@@ -34,10 +35,9 @@ public class specPlatform : MonoBehaviour
             if (countTimer < visibleTime)
             {
                 spriteRenderer.enabled = true;
-                //decreasing the normalized alpha value
-                Color a = spriteRenderer.color;
-                a.a = (5f-countTimer-0f) / (5f-0f);
-                spriteRenderer.color = a;
+                //decreasing the normalized alpha value                
+                float alphaNormalized = (5f-countTimer-0f) / (5f-0f);                
+                spriteRenderer.color = setSpriteAlpha(alphaNormalized, spriteRenderer.color);
             }
             else
             {
@@ -59,5 +59,12 @@ public class specPlatform : MonoBehaviour
             spriteEnabled = true;
             hitPlatform.Play();
         }
+    }
+
+    private Color setSpriteAlpha(float alpha,Color ogSpriteColor)
+    {
+        Color ogColor = ogSpriteColor;
+        ogColor.a = alpha;
+        return ogColor;
     }
 }

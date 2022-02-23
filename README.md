@@ -13,12 +13,14 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 * get your game play tested by 5 people or more
 
 ### Most important for today *(23.2)*
-* test the game design of the xray view -> works good
-    * test change xray time to just work when player holds button down, and he has like 3 seconds to use ~~after its depleted it take 3 seconds to recharge, but only when fully recharged its usable (grey while recharging)~~
-        * -> added 5 sec viewable timer to platforms, they slowly fade out
-        * -> xray can just be refiled with pickups
-* create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range etc
-* draw "ball player"
+* *test the game design of the xray view -> works good*
+    * *test change xray time to just work when player holds button down, and he has like 3 seconds to use ~~after its depleted it take 3 seconds to recharge, but only when fully recharged its usable (grey while recharging)~~*
+        * *-> added 5 sec viewable timer to platforms, they slowly fade out*
+        * *-> xray can just be refiled with pickups'*
+
+
+* @create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range etc
+* ~~draw "ball player"~~
 * ~~and just 1 health, because it makes everything worse~~ → instant death makes it better
 * add parallax effect to game so it has depth
 * "level done" pickup w/ icon and  next lvl canvas(without function)
@@ -26,12 +28,12 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 * add some pickup for points/ u have to pick up all to pass a level...
 
 ### Art 
-- import all art without cutting the corners to hard
-    - import new art
-    - reimport old assets 
-- different backgrounds (tree layer, mountains/hills etc)
+- ~~import all art without cutting the corners to hard~~
+    - ~~import new art~~
+    - ~~reimport old assets~~
+- ~~different backgrounds (tree layer, mountains/hills etc)~~
  - ~~draw hearts for UI~~
-- draw icon/bar for xray view 
+- ~~draw icon/bar for xray view~~
 
     #### *later*
     * particle effects for everything (getting hit, landing somewhere)
@@ -49,7 +51,7 @@ Levels design and creation of the 3 levels should be done after all the art and 
 * level loading mechanism
 
 ### UI 
-* show xray view somehow
+* ~~show xray view somehow~~
 * next level/level completed canvas
 * death counter ?
 * starting menu etc

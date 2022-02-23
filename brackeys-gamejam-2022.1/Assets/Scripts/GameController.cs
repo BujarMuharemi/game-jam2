@@ -20,8 +20,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        xrayState = pm.xrayUsed;
-        Debug.Log(xrayState);
+        xrayState = pm.xrayUsed;        
 
         if (Input.GetKeyDown("r"))
         {
