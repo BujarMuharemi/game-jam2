@@ -29,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
     //HealthbarController healthbarControler;
     PlayerAudio pAudio;
     bool playerRolling;
-    float velocityPositive;    
+    float velocityPositive;
+    public float rollingSpeed = 6f;
 
     void Start()
     {
@@ -47,12 +48,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         velocityPositive = rigi.velocity.x < 0 ? (rigi.velocity.x * -1f) : rigi.velocity.x;
-        Debug.Log(velocityPositive);
+        
 
         if (health == 0 && !playerDead)
         {
             playerAS.PlayOneShot(pAudio.audioArray[1]); //hit sound
-            playerAS.Play(); //death sound
+            //playerAS.Play(); //death sound
             playerDead = true;
             
         }
@@ -62,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;            
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-            Debug.DrawRay(transform.position, -Vector2.up, Color.green);
+            //Debug.DrawRay(transform.position, -Vector2.up, Color.green);
 
             if (hit.collider != null)
             {
@@ -136,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 a = new Vector2(horizontalMove + movementSpeed * Time.fixedDeltaTime, 0);
             rigi.AddForce(a);
-            playerBase.transform.RotateAround(transform.position, Vector3.back, Input.GetAxis("Horizontal") * 5 );
+            playerBase.transform.RotateAround(transform.position, Vector3.back, Input.GetAxis("Horizontal") * rollingSpeed );
 
 
         }
@@ -157,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //playerAS.PlayOneShot(pAudio.audioArray[2],0.2f); //hitplatform sound
+            playerAS.PlayOneShot(pAudio.audioArray[2],0.3f); //hitplatform sound
         }
     }
 
