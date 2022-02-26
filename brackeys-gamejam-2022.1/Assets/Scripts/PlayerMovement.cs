@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public int health = 3;
     //HealthbarController healthbarControler;
+    PlayerAudio pAudio;
+    bool playerRolling;
+    float velocityPositive;    
 
     void Start()
     {
@@ -37,14 +40,19 @@ public class PlayerMovement : MonoBehaviour
 
         playerBase = transform.GetChild(0).gameObject;
         //healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
+        pAudio = gameObject.GetComponent<PlayerAudio>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        velocityPositive = rigi.velocity.x < 0 ? (rigi.velocity.x * -1f) : rigi.velocity.x;
+        Debug.Log(velocityPositive);
+
         if (health == 0 && !playerDead)
         {
-            playerAS.Play();
+            playerAS.PlayOneShot(pAudio.audioArray[1]); //hit sound
+            playerAS.Play(); //death sound
             playerDead = true;
             
         }
@@ -75,7 +83,10 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown("w") && jumpAllowed)
             {
                 jumpAllowed = false;
+                playerAS.PlayOneShot(pAudio.audioArray[0], 0.2f); //jumping sound
                 rigi.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+
+
             }           
             else if (Input.GetKey("m"))
             {
@@ -94,6 +105,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 xrayUsed = false;
             }
+            else if(velocityPositive < 0.02f && (Input.GetKey("a") || Input.GetKey("d")))
+            {
+                playerRolling = true;
+                playerAS.clip = pAudio.audioArray[3];               
+                playerAS.loop = true;
+                playerAS.Play(); //jumping sound
+
+            }
+            else if (Input.GetKeyUp("a") || Input.GetKeyUp("d"))
+            {
+                
+                   playerAS.clip = pAudio.audioArray[4]; //setting back to playerDead audio clip               
+                   playerAS.loop = false;
+                   playerAS.Stop(); //jumping sound
+                   playerRolling = false;
+                               
+            }            
         }
         else
         {
@@ -127,6 +155,10 @@ public class PlayerMovement : MonoBehaviour
             health -= 3;
             //healthbarControler.decreaseHealth(health,1);
         }
+        else
+        {
+            //playerAS.PlayOneShot(pAudio.audioArray[2],0.2f); //hitplatform sound
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -139,6 +171,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             xraySlider.value += 1;
+            playerAS.PlayOneShot(pAudio.audioArray[5]);                  
+
+
             //health++;
             //healthbarControler.increaseHealth(health, 1);
         }

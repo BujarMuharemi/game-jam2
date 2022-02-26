@@ -57,7 +57,7 @@ public class specPlatform : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             spriteEnabled = true;
-            hitPlatform.Play();
+            //hitPlatform.Play();
         }
     }
 

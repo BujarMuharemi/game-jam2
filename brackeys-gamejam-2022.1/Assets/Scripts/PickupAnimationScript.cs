@@ -20,4 +20,6 @@ public class PickupAnimationScript : MonoBehaviour
             transform.position = startPosition + new Vector3( 0.0f, Mathf.Sin(Time.time)*upDownScale, 0.0f);
         }
     }
+
+    
 }
