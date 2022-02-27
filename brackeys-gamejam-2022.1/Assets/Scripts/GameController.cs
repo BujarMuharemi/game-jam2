@@ -55,6 +55,14 @@ public class GameController : MonoBehaviour
             pm.playerDead = true;
             GameWonPanel.SetActive(true);
         }
+
+        if (Tutorial.activeSelf)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                startLevel();
+            }
+        }
         
     }
 
@@ -82,6 +90,7 @@ public class GameController : MonoBehaviour
 
     public void startLevel()
     {
+        Debug.Log("asdf");
         Tutorial.SetActive(false);
         pm.gameStarted = true;
         

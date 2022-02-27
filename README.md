@@ -1,5 +1,9 @@
-b# game-jam2
-A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.1](https://itch.io/jam/brackeys-7). The goal is to have a semi finished prototype which include the following: 
+# Find the Door - game-jam2
+A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.1](https://itch.io/jam/brackeys-7). 
+
+[Link to play the game](https://the-bm.itch.io/find-the-door)
+
+The goal is to have a semi finished prototype which include the following: 
 * game design which fits the theme
 * better graphics, music and sfx then last time
 * more polish then last time
@@ -16,12 +20,15 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 <br></br>
 
 ## To Do List
+```
 ? = not sure if enough time or if it should be implemented
 crossed out text = done
 || = partly done (count lines etc)
+```
+
 ### General
-* find a name for the game -> **Find the Door**  (Red Eye, Invisible Door, , Rolling Glasses)
-* get your game play tested by 5 people or more ? too late for that
+* ~~find a name for the game~~ -> **Find the Door**  (Red Eye, Invisible Door, , Rolling Glasses)
+* get your game play tested by 5 people or more ? too late for that...
 
 ### Most important for today *(23.2)*
 * ~~test the game design of the xray view -> works good~~
@@ -36,7 +43,11 @@ crossed out text = done
 * ~~"level done" pickup w/ icon and  next lvl canvas(without function)~~
 * add some pickup for points/ u have to pick up all to pass a level... ?
 * ~~create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range,speed etc~~
-* level loading mechanism & menus etc ?
+
+### Most important for today *(27.2)*
+* ~~a working webGL build an upload to itch.io~~
+* fixing random bug of "start level" btn not working
+
     ### SFX (1,5h) -> took 2,5h
     should also be done before starting level creation. I very simple in unity.
     * ~~player "rolling/walking", jumping, landing, getting hit, dying~~
@@ -49,7 +60,7 @@ crossed out text = done
 
     * tutorial level |
         * text tutorial while clicking next etc 
-    * first easy level ||
+    * ~~first easy level~~
     * second/end level
     * checkpoints ?
     * 5 min playtime for the whole game ?  
@@ -72,28 +83,37 @@ ___
 * ~~show xray view somehow~~
 * next level/level completed canvas
 * death counter ?
-* starting menu etc
+* ~~starting menu etc~~
 * ~~drawing it all & scanning~~
 -> maybe skip the level loader etc, just one big level....
 
 ### Music (1h)
 * some music which matches the style and pace of the game
-* 1 songs minimum, which loop
+* 1 songs minimum, which loops
 
 ___
 <br></br>
 ## Things learned (misc list)
-* time management and splitting the work for each day is critical
-* a week long game jam is too long to have a real "sprint"
-* always import all sprites with the same pixels per unit, so they look good with a scale of one. This makes it easier for scaling and all sprites look the same/better..
-* art is never finished and can always be improved upon
-* the structure of the imported art runs threw the Sprite & prefabs folder structure
-    * a good folder structure for the art should be chosen at the beginning of the project
-* the level hierarchy should always group similar objects together so it does not become a mess (should also match the art folder structure)
 
-* Unity Stuff
+* **Game Jam**
+    * time management and splitting the work for each day is critical
+    * a week long game jam is too long to have a real "sprint"
+    * the last hour should always be used 
+    * your game design should match the theme strongly
+        * then you are better motivated to finish & add the extra hours into the game
+
+* **Art**
+    * art is never finished and can always be improved upon
+    * importing and preparing art is time intensive
+    
+* **Unity Stuff**
+    * always import all sprites with the same pixels per unit, so they look good with a scale of one. This makes it easier for scaling and all sprites look the same/better..
     * a second collider type can be added to a trigger collider. Then it can still interact with collision etc
     * when starting to design a level, move everything below the UI/Canvas elements. They wont intervene with "taller" level and selecting objects in the scene view
+    * folder organization
+        * the structure of the imported art runs threw the Sprite & prefabs folder structure
+            * a good folder structure for the art should be chosen at the beginning of the project
+        * the level hierarchy should always group similar objects together so it does not become a mess (should also match the art folder structure)
 
 ___
 <br></br>
