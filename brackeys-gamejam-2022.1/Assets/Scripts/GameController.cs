@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public bool xrayState = false;
+    
 
     public GameObject player;
     PlayerMovement pm;
     GameObject GameOverPanel;
     GameObject GameWonPanel;
+    GameObject MainMenu;
+    GameObject Tutorial;
     EndPickup endPickup;
+    Vector3 playerStartPos;
 
     void Start()
     {
@@ -22,7 +26,12 @@ public class GameController : MonoBehaviour
         GameWonPanel = GameObject.Find("GameEndPanel");
         GameWonPanel.SetActive(false);
 
+        MainMenu = GameObject.Find("MainMenu");
+        Tutorial = GameObject.Find("TutorialPanel");
+        Tutorial.SetActive(false);
+
         endPickup = GameObject.Find("EndPickup").GetComponent<EndPickup>();
+        playerStartPos = pm.transform.position;
     }
 
     void Update()
@@ -32,7 +41,11 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("r"))
         {
             //Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //MainMenu.SetActive(false);
+            //Tutorial.SetActive(false);
+            resetGame();
+
         }
         else if (Input.GetKey("escape"))
         {
@@ -42,6 +55,7 @@ public class GameController : MonoBehaviour
             pm.playerDead = true;
             GameWonPanel.SetActive(true);
         }
+        
     }
 
     private void LateUpdate()
@@ -52,5 +66,34 @@ public class GameController : MonoBehaviour
             GameOverPanel.SetActive(true);
             //Time.timeScale = 0;
         }
+        
+    }
+
+    public void QuitGameBtn()
+    {
+        Application.Quit();
+    }
+
+    public void StartGameBtn()
+    {
+        MainMenu.SetActive(false);
+        Tutorial.SetActive(true);
+    }
+
+    public void startLevel()
+    {
+        Tutorial.SetActive(false);
+        pm.gameStarted = true;
+        
+    }
+
+    void resetGame()
+    {
+        pm.playerDead = false;
+        pm.gameStarted = true;
+        pm.health = 3;
+        pm.transform.position = playerStartPos;
+        GameOverPanel.SetActive(false);
+        pm.xraySlider.value = 3f;
     }
 }

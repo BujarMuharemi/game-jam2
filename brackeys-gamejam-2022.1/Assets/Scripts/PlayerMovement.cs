@@ -18,10 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float xrayCooldown = 0f;
     public bool xrayUsed = false;
-    Slider xraySlider;
+    public Slider xraySlider;
 
     public bool playerDead = false;
     AudioSource playerAS;
+    AudioListener audioListener;
     GameObject playerBase;
 
     SpriteRenderer spriteRenderer;
@@ -31,37 +32,52 @@ public class PlayerMovement : MonoBehaviour
     bool playerRolling;
     float velocityPositive;
     public float rollingSpeed = 6f;
+    public bool gameStarted = false;
+    GameObject a;
 
     void Start()
     {
         this.rigi = this.gameObject.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerAS = gameObject.GetComponent<AudioSource>();
+        audioListener = gameObject.GetComponent<AudioListener>();
+        audioListener.enabled = false;
+
         xraySlider = GameObject.Find("XrayBar").transform.GetChild(0).GetComponent<Slider>();
 
         playerBase = transform.GetChild(0).gameObject;
         //healthbarControler = GameObject.Find("Healthbar").GetComponent<HealthbarController>();
         pAudio = gameObject.GetComponent<PlayerAudio>();
+
+        a = GameObject.Find("playerGlasses");
+        Debug.Log(a.name);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        a.SetActive(true);
         velocityPositive = rigi.velocity.x < 0 ? (rigi.velocity.x * -1f) : rigi.velocity.x;
         
 
         if (health == 0 && !playerDead)
         {
             playerAS.PlayOneShot(pAudio.audioArray[1]); //hit sound
-            //playerAS.Play(); //death sound
+            playerAS.Play(); //death sound
             playerDead = true;
             
         }
 
-        if (!playerDead)
+        if (Input.anyKey)
         {
-            horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;            
+            audioListener.enabled = true;
+        }
 
+        if (!playerDead && gameStarted)
+        {
+            horizontalMove = Input.GetAxis("Horizontal") * movementSpeed;
+            
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
             //Debug.DrawRay(transform.position, -Vector2.up, Color.green);
 

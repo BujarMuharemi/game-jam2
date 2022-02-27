@@ -20,7 +20,7 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 crossed out text = done
 || = partly done (count lines etc)
 ### General
-* find a name for the game -> Red Eye, Invisible Door, Find the Door, Rolling Glasses
+* find a name for the game -> **Find the Door**  (Red Eye, Invisible Door, , Rolling Glasses)
 * get your game play tested by 5 people or more ? too late for that
 
 ### Most important for today *(23.2)*
