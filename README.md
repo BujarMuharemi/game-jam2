@@ -9,10 +9,16 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
     * ![first screenshot](./firstScreenshot.PNG)
 * second screenshot 
     * ![second screenshot](./secondScreenshot.PNG)
+* third screenshot 
+    * ![third screenshot](./3screenshot.PNG)
+
 <br></br>
 <br></br>
 
 ## To Do List
+? = not sure if enough time or if it should be implemented
+crossed out text = done
+|| = partly done (count lines etc)
 ### General
 * find a name for the game -> Red Eye, Invisible Door, Find the Door, Rolling Glasses
 * get your game play tested by 5 people or more ? too late for that
@@ -25,12 +31,12 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
 * ~~draw "ball player"~~
 * ~~and just 1 health, because it makes everything worse~~ → instant death makes it better
 * ~~add parallax effect to game so it has depth -> added it but need to change art for the "infinity" layers~~
+
 ### Most important for today *(26.2)*
 * ~~"level done" pickup w/ icon and  next lvl canvas(without function)~~
 * add some pickup for points/ u have to pick up all to pass a level... ?
-► @**create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range,speed etc**
+* ~~create a moving platform script with a lot of public settings, which can be used for everything (platforms, spikes, saws) -> use debug line to show their travel range,speed etc~~
 * level loading mechanism & menus etc ?
-
     ### SFX (1,5h) -> took 2,5h
     should also be done before starting level creation. I very simple in unity.
     * ~~player "rolling/walking", jumping, landing, getting hit, dying~~
@@ -41,10 +47,11 @@ A puzzle physics platformer game made in a week for the [Brackeys Game Jam 2022.
     ### Level Design & play testing (5h)
     Levels design and creation of the 3 levels should be done after all the art and game mechanics are almost final. 
 
-    * tutorial level -> text tutorial while clicking next etc |
-    * checkpoints ?
-    * first easy level |
+    * tutorial level |
+        * text tutorial while clicking next etc 
+    * first easy level ||
     * second/end level
+    * checkpoints ?
     * 5 min playtime for the whole game ?  
 ___
 ### Art 
@@ -91,7 +98,9 @@ ___
 ___
 <br></br>
 ## To do after jam
-* commenting & adding a description to all scripts
+* commenting & adding a description to all the scripts
+    * organize the scripts into folders
+    * rename scripts if needed
 
 
 

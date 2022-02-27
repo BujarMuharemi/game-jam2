@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class EndPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool gameWon = false;   
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Finidhes Level");       
+        if (col.gameObject.tag == "Player")
+        {
+            gameWon = true;
+        }
     }
 }

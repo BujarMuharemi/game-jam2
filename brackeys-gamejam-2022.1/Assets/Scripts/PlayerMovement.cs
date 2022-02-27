@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public bool xrayUsed = false;
     Slider xraySlider;
 
-    bool playerDead = false;
+    public bool playerDead = false;
     AudioSource playerAS;
     GameObject playerBase;
 

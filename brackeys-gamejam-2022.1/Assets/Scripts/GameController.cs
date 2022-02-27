@@ -10,12 +10,19 @@ public class GameController : MonoBehaviour
     public GameObject player;
     PlayerMovement pm;
     GameObject GameOverPanel;
+    GameObject GameWonPanel;
+    EndPickup endPickup;
 
     void Start()
     {
         GameOverPanel = GameObject.Find("GameOverPanel");
         GameOverPanel.SetActive(false);
         pm  = player.GetComponent<PlayerMovement>();
+
+        GameWonPanel = GameObject.Find("GameEndPanel");
+        GameWonPanel.SetActive(false);
+
+        endPickup = GameObject.Find("EndPickup").GetComponent<EndPickup>();
     }
 
     void Update()
@@ -30,6 +37,10 @@ public class GameController : MonoBehaviour
         else if (Input.GetKey("escape"))
         {
             Application.Quit();
+        }else if (endPickup.gameWon)
+        {
+            pm.playerDead = true;
+            GameWonPanel.SetActive(true);
         }
     }
 
